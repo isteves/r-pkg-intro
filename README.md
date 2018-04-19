@@ -26,4 +26,4 @@ And some **keyboard short-cuts**:
 
 Other reading/resources:
 
-- (Unix Design Philosophy)[http://wiki.c2.com/?UnixDesignPhilosophy] - design principles to think about when designing software/etc; many points are echoed in the [R packages book](http://r-pkgs.had.co.nz/)
+- [Unix Design Philosophy](http://wiki.c2.com/?UnixDesignPhilosophy) - design principles to think about when designing software/etc; many points are echoed in the [R packages book](http://r-pkgs.had.co.nz/)
