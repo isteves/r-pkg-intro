@@ -147,8 +147,8 @@ Connect to GitHub
 
 2. In the Terminal (Tools --> Shell), set up your user name and email if you haven't already:
 ```
-git config user.name GITHUB_USERNAME
-git config user.email GITHUB_USER_EMAIL
+git config --global user.name YOUR_NAME
+git config --global user.email GITHUB_USER_EMAIL
 ```
 
 3. Link to GitHub and push your local files to your online GitHub repository
