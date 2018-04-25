@@ -157,13 +157,13 @@ git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
 git push -u origin master
 ```
 
-[Travis](https://travis-ci.org/) - continuous integration
+Travis - continuous integration
 ========================================================
 ![](static/Tessa-pride-4.png)
 
 ***
 
-- log in with GitHub
+- log in to [Travis](https://travis-ci.org/) with GitHub
 - perform basic checks on R packages (`devtools::check()`)
 - re-build bookdown books
 
