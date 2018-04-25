@@ -150,9 +150,36 @@ git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
 git push -u origin master
 ```
 
+[Travis](https://travis-ci.org/) - continuous integration
+========================================================
+![](static/Tessa-pride-4.png)
+
+***
+
+- log in with GitHub
+- perform basic checks on R packages (`devtools::check()`)
+- re-build bookdown books
+
+.travis.yml
+========================================================
+
+Full documentation at: https://docs.travis-ci.com/user/languages/r
+
+```
+language: r
+r:
+  - release
+  - devel
+sudo: false
+cache: packages
+addons:
+   apt:
+    packages:
+      - librdf0-dev
+```
+
 Advanced topics
 ========================================================
 
 - [vignettes](http://r-pkgs.had.co.nz/vignettes.html)
 - [pkgdown](https://github.com/r-lib/pkgdown)
-- continuous integration with [Travis](https://travis-ci.org/)
