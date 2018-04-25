@@ -14,7 +14,7 @@ Here are some other great **packages** you may want to check out:
 - [usethis](https://github.com/r-lib/usethis) 
 - [goodpractice](https://github.com/MangoTheCat/goodpractice) 
 - [styler](https://github.com/r-lib/styler) for auto-style checking
-- [lintr](https://github.com/jimhester/lintr) for style
+- [lintr](https://github.com/jimhester/lintr) for style - use with Travis to auto-check your code!
 - [pkgdown](https://github.com/r-lib/pkgdown) for creating a website for your package
 
 And some **keyboard short-cuts**:
