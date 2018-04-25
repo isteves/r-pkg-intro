@@ -163,9 +163,11 @@ Travis - continuous integration
 
 ***
 
-- log in to [Travis](https://travis-ci.org/) with GitHub
-- perform basic checks on R packages (`devtools::check()`)
-- re-build bookdown books
+Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
+
+- perform basic checks on R packages
+- re-build bookdown books ([example](https://github.com/isteves/two-bookdowns-example))
+- run custom scripts ([example](https://github.com/espm-157/popdyn-template))
 
 .travis.yml
 ========================================================
