@@ -1,14 +1,15 @@
 How to Create an R Package
 ========================================================
 author: Irene Steves, Mitchell Maier
-date: 
+date:
 autosize: true
 
 Why write a package?
 ========================================================
 
-- organize code
+- organize code and data
 - reuse code more easily
+- test code
 - share code with others
 
 > “Seriously, it doesn’t have to be about sharing your code (although that is an added benefit!). It is about saving yourself time.” --Hilary Parker
@@ -18,9 +19,13 @@ Package structure
 
 - R code (`/R`)
 - Documentation (`/man`)
-- Tests (`/test`)
+- Tests (`tests/`)
 - Package metadata (`DESCRIPTION`)
 - Namespace (`NAMESPACE`)
+- Data (`data/`)
+- Compiled code (`src/`)
+- Installed files (`inst/`)
+- Other components
 
 Resources
 ========================================================
@@ -32,8 +37,7 @@ Resources
 Packages you need
 ========================================================
 
-
-```r
+```{r warning = FALSE, message = FALSE}
 #install.packages(c("devtools", "roxygen2", "testthat"))
 
 library(devtools)
@@ -48,20 +52,20 @@ Create a package in RStudio
 File --> New Project --> New Directory --> R Package
 
 ## Option 2
-
-```r
+```{r eval = FALSE}
 devtools::create("path/pkgname")
 ```
 
 Write a function
 ========================================================
 Print an Aloha message in green:
-
-```r
-aloha <- function(name) {
+```{r}
+aloha_message <- function(name) {
   cat(crayon("Aloha,", name))
 }
 ```
+
+*As always remember to write descriptive funciton names that don't overlap with existing functions*
 
 Write your documentation
 ========================================================
@@ -69,24 +73,26 @@ Use Tools --> Roxygen Quick Reference as a template
 
 Common sections:
 - title
-- description
+- `@description`
 - `@param` - parameters/arguments
 - `@examples` - examples of how to use your function
-- `@export` - make this functiona available to package users (helper functions do not need this)
+- `@export` - make this function available to package users (helper functions do not need this)
 - `@import`/`@importFrom` - import packages/functions from other packages; used to generate the `NAMESPACE`
+
+*Use import calls instead of `library` or `require` calls*
 
 ========================================================
 
 ```
-#' My aloha function
+#' Say Aloha
 #'
-#' A description
+#' @description This function will say aloha to any inputted name.
 #'
-#' @param name (character) A name to say aloha to
+#' @param name (character) A name to say aloha to.
+#'
+#' @importFrom crayon green
 #'
 #' @export
-#' 
-#' @importFrom crayon green
 ```
 
 Check and document your package
@@ -94,8 +100,7 @@ Check and document your package
 
 Auto-generates your help (`/man`) and `NAMESPACE` files:
 
-
-```r
+```{r eval = FALSE}
 # delete any *.Rd or NAMESPACE files before running for the first time
 
 devtools::document()
@@ -103,8 +108,7 @@ devtools::document()
 
 Check your package for completeness:
 
-
-```r
+```{r eval = FALSE}
 devtools::check()
 ```
 
@@ -123,8 +127,7 @@ Unit tests
 - easier restarts
 - robust code
 
-
-```r
+```{r eval = FALSE}
 devtools::use_testthat()
 ```
 
@@ -132,8 +135,7 @@ Write a unit test
 ========================================================
 New R script: `test_FUNCTION_NAME.R`
 
-
-```r
+```{r eval = FALSE}
 context("My aloha function")
 
 test_that("takes one input",{
