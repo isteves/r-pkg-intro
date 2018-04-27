@@ -37,7 +37,8 @@ Resources
 Packages you need
 ========================================================
 
-```{r warning = FALSE, message = FALSE}
+
+```r
 #install.packages(c("devtools", "roxygen2", "testthat"))
 
 library(devtools)
@@ -52,14 +53,16 @@ Create a package in RStudio
 File --> New Project --> New Directory --> R Package
 
 ## Option 2
-```{r eval = FALSE}
+
+```r
 devtools::create("path/pkgname")
 ```
 
 Write a function
 ========================================================
 Print an Aloha message in green:
-```{r, eval = FALSE}
+
+```r
 aloha_message <- function(name) {
   cat(crayon::green("Aloha,", name))
 }
@@ -83,22 +86,30 @@ Common sections:
 
 Document your function:
 ========================================================
-```{r, echo = FALSE}
-cat(readLines("../../R/aloha_message.R"), sep = "\n")
+
+```
+#' Say Aloha
+#'
+#' @description This function will say aloha to any inputted name.
+#'
+#' @param name (character) A name to say aloha to.
+#'
+#' @importFrom crayon green
+#'
+#' @export
+aloha_message <- function(name) {
+  cat(crayon::green("Aloha,", name))
+}
 ```
 
 
 Document your package:
 ========================================================
 
-```{r, echo = FALSE, results = FALSE}
-# Reset All Package To Skeleton
-file.remove("NAMESPACE")
-Blank_DESCRIPTION <- readLines("../Blank_DESCRIPTION")
-writeLines(Blank_DESCRIPTION, "../../DESCRIPTION")
-```
 
-```{r eval = TRUE}
+
+
+```r
 # delete any *.Rd or NAMESPACE files before running for the first time
 devtools::document()
 ```
@@ -108,40 +119,60 @@ Check your package
 
 Auto-generates your help files (`/man`) and `NAMESPACE` file:
 
-```{r eval = TRUE}
+
+```r
 devtools::check()
+```
+
+```
+checking package dependencies ... ERROR
+Namespace dependency not required: ‘crayon’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 ```
 
 Description File
 ========================================================
-```{r, echo = FALSE}
-DESCRIPTION <- readLines("../../DESCRIPTION")
-cat(DESCRIPTION, sep = "\n")
+
+```
+Package: TEST
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+Depends: R (>= 3.4.3)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
 ```
 
 Edit Description File
 ========================================================
-```{r, echo = FALSE}
-DESCRIPTION[2] = "Title: Say Aloha to a Friend"
-DESCRIPTION[3] = "Version: 0.1"
-DESCRIPTION[4] = 'Authors@R: c(
+
+```
+Package: TEST
+Title: Say Aloha to a Friend
+Version: 0.1
+Authors@R: c(
   person("Irene", "Steves", email = "irene.steves@gmail.com", role = c("aut", "cre")),
-  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("aut")))'
-DESCRIPTION[5] = 'Description: This package provides a pleasant way to say hello or goodbye to a friend.'
-DESCRIPTION[7] = 'License: CC0'
-DESCRIPTION[11] = 'Imports: crayon'
-DESCRIPTION[12] = 'Suggests: testthat'
-
-
-writeLines(DESCRIPTION, "../../DESCRIPTION")
-DESCRIPTION <- readLines("../../DESCRIPTION")
-cat(DESCRIPTION, sep = "\n")
+  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("aut")))
+Description: This package provides a pleasant way to say hello or goodbye to a friend.
+Depends: R (>= 3.4.3)
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports: crayon
+Suggests: testthat
 ```
 
 Check your package again
 ========================================================
 
-```{r eval = TRUE}
+
+```r
 devtools::check()
 ```
 
@@ -153,7 +184,8 @@ Unit tests
 - easier restarts
 - robust code
 
-```{r eval = FALSE}
+
+```r
 devtools::use_testthat()
 ```
 
@@ -161,8 +193,13 @@ Write a unit test
 ========================================================
 New R script: `test_FUNCTION_NAME.R`
 
-```{r echo = FALSE}
-cat(readLines("../../tests/testthat/test_aloha_message.R"), sep = "\n")
+
+```
+context("My aloha function")
+
+test_that("function takes one input", {
+  expect_error(aloha_message("Irene", "Mitchell"))
+})
 ```
 
 Connect to GitHub

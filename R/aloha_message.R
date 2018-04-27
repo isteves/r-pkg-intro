@@ -8,5 +8,5 @@
 #'
 #' @export
 aloha_message <- function(name) {
-  cat(crayon("Aloha,", name))
+  cat(crayon::green("Aloha,", name))
 }
