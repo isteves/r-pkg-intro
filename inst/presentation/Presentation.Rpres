@@ -34,17 +34,6 @@ Resources
 - [R packages](http://r-pkgs.had.co.nz/) book by Hadley Wickham
 - Official [writing R extensions](https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages) guide
 
-Packages you need
-========================================================
-
-```{r warning = FALSE, message = FALSE}
-#install.packages(c("devtools", "roxygen2", "testthat"))
-
-library(devtools)
-library(roxygen2)
-library(testthat)
-```
-
 Create a package in RStudio
 ========================================================
 
@@ -52,20 +41,44 @@ Create a package in RStudio
 File --> New Project --> New Directory --> R Package
 
 ## Option 2
-```{r eval = FALSE}
-devtools::create("path/pkgname")
+```{r eval = FALSE, cache = TRUE}
+#install.package("devtools")
+devtools::create("~/Desktop/greetings")
 ```
+
+*Would want to do a better giving your package a unique name.*
 
 Write a function
 ========================================================
-Print an Aloha message in green:
-```{r, eval = FALSE}
-aloha_message <- function(name) {
-  cat(crayon::green("Aloha,", name))
+```{r}
+say_aloha <- function(name, print = TRUE) {
+
+  message <- paste("Aloha,",
+                   name,
+                   emo::ji("palm_tree"),
+                   emo::ji("sunny"),
+                   emo::ji("ocean"))
+
+  if (print) {
+    cat(crayon::bgGreen(message))
+  }
+
+    invisible(message)
 }
 ```
 
 *As always remember to write descriptive funciton names that don't overlap with existing functions*
+
+Add tests to your function
+========================================================
+```{r, eval = FALSE}
+if (!(is.character(name) & nchar(name) > 0)) {
+  stop("Name must be a non empty character.
+       Input a name you want to say aloha to!")
+}
+
+stopifnot(is.logical(print))
+```
 
 Write your documentation
 ========================================================
@@ -83,22 +96,40 @@ Common sections:
 
 Document your function:
 ========================================================
-```{r, echo = FALSE}
-cat(readLines("../../R/aloha_message.R"), sep = "\n")
+```{r}
+#' Say Aloha
+#'
+#' @description This function will say aloha to any inputted name.
+#'
+#' @param name (character) A name to say aloha to.
+#' @param print (logical) Option to print your message. Defaults to \code{TRUE}
+#'
+#' @return (charater) An aloha message
+#'
+#' @examples
+#' # Say hello to a friend
+#' friend <- "Irene"
+#' say_aloha(friend)
+#'
+#' @importFrom crayon green
+#' @importFrom emo ji
+#'
+#' @export
 ```
 
 
 Document your package:
 ========================================================
 
-```{r, echo = FALSE, results = FALSE}
+```{r, echo = FALSE, results = FALSE, cache = TRUE}
 # Reset All Package To Skeleton
-file.remove("NAMESPACE")
+file.remove("../../NAMESPACE")
+file.remove("../../man/say_aloha.Rd")
 Blank_DESCRIPTION <- readLines("../Blank_DESCRIPTION")
 writeLines(Blank_DESCRIPTION, "../../DESCRIPTION")
 ```
 
-```{r eval = TRUE}
+```{r eval = TRUE, cache = TRUE}
 # delete any *.Rd or NAMESPACE files before running for the first time
 devtools::document()
 ```
@@ -108,29 +139,30 @@ Check your package
 
 Auto-generates your help files (`/man`) and `NAMESPACE` file:
 
-```{r eval = TRUE}
+```{r eval = TRUE, cache = TRUE}
 devtools::check()
 ```
 
 Description File
 ========================================================
-```{r, echo = FALSE}
+```{r, echo = FALSE, cache = TRUE}
 DESCRIPTION <- readLines("../../DESCRIPTION")
 cat(DESCRIPTION, sep = "\n")
 ```
 
 Edit Description File
 ========================================================
-```{r, echo = FALSE}
-DESCRIPTION[2] = "Title: Say Aloha to a Friend"
-DESCRIPTION[3] = "Version: 0.1"
-DESCRIPTION[4] = 'Authors@R: c(
+```{r, echo = FALSE, cache = TRUE}
+DESCRIPTION[2] <- "Title: Say Aloha to a Friend"
+DESCRIPTION[3] <- "Version: 0.1"
+DESCRIPTION[4] <- 'Authors@R: c(
   person("Irene", "Steves", email = "irene.steves@gmail.com", role = c("aut", "cre")),
   person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("aut")))'
-DESCRIPTION[5] = 'Description: This package provides a pleasant way to say hello or goodbye to a friend.'
-DESCRIPTION[7] = 'License: CC0'
-DESCRIPTION[11] = 'Imports: crayon'
-DESCRIPTION[12] = 'Suggests: testthat'
+DESCRIPTION[5] <- 'Description: This package provides a pleasant way to say hello or goodbye to a friend.'
+DESCRIPTION[7] <- 'License: CC0'
+DESCRIPTION[11] <- 'Imports: crayon, emo'
+DESCRIPTION[12] <- 'Remotes: hadley/emo'
+DESCRIPTION[13] <- 'Suggests: testthat'
 
 
 writeLines(DESCRIPTION, "../../DESCRIPTION")
@@ -141,7 +173,7 @@ cat(DESCRIPTION, sep = "\n")
 Check your package again
 ========================================================
 
-```{r eval = TRUE}
+```{r eval = FALSE}
 devtools::check()
 ```
 
@@ -162,9 +194,54 @@ Write a unit test
 New R script: `test_FUNCTION_NAME.R`
 
 ```{r echo = FALSE}
-cat(readLines("../../tests/testthat/test_aloha_message.R"), sep = "\n")
+cat(readLines("../../tests/testthat/test_say_aloha.R"), sep = "\n")
 ```
 
+Add data files
+========================================================
+Can create data files (e.g. `View(iris)`)
+```{r, eval = FALSE}
+friends <- c("Mitchell", "Irene")
+devtools::use_data(friends)
+```
+
+Document data files
+========================================================
+Create a new R/data.R file
+```{r, eval = FALSE}
+#' Friends list
+#'
+#' A list of friends I like to say aloha to.
+#'
+#' @format A vector with two strings
+"friends"
+```
+
+```{r eval = TRUE, cache = TRUE}
+devtools::document()
+```
+
+Install package
+========================================================
+```{r}
+devtools::install()
+```
+
+Vignettes
+========================================================
+TODO
+
+Explore package
+========================================================
+```{r}
+greetings::say_aloha(greetings::friends)
+```
+
+```{r, eval = FALSE}
+.rs.restartR() #restart R to see documentation
+?greetings::say_aloha
+?greetings::friends
+```
 Connect to GitHub
 ========================================================
 1. Create a GitHub repo with the same name

@@ -34,18 +34,6 @@ Resources
 - [R packages](http://r-pkgs.had.co.nz/) book by Hadley Wickham
 - Official [writing R extensions](https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages) guide
 
-Packages you need
-========================================================
-
-
-```r
-#install.packages(c("devtools", "roxygen2", "testthat"))
-
-library(devtools)
-library(roxygen2)
-library(testthat)
-```
-
 Create a package in RStudio
 ========================================================
 
@@ -55,20 +43,45 @@ File --> New Project --> New Directory --> R Package
 ## Option 2
 
 ```r
-devtools::create("path/pkgname")
+#install.package("devtools")
+devtools::create("~/Desktop/greetings")
 ```
+
+*Would want to do a better giving your package a unique name.*
 
 Write a function
 ========================================================
-Print an Aloha message in green:
 
 ```r
-aloha_message <- function(name) {
-  cat(crayon::green("Aloha,", name))
+say_aloha <- function(name, print = TRUE) {
+
+  message <- paste("Aloha,",
+                   name,
+                   emo::ji("palm_tree"),
+                   emo::ji("sunny"),
+                   emo::ji("ocean"))
+
+  if (print) {
+    cat(crayon::bgGreen(message))
+  }
+
+    invisible(message)
 }
 ```
 
 *As always remember to write descriptive funciton names that don't overlap with existing functions*
+
+Add tests to your function
+========================================================
+
+```r
+if (!(is.character(name) & nchar(name) > 0)) {
+  stop("Name must be a non empty character.
+       Input a name you want to say aloha to!")
+}
+
+stopifnot(is.logical(print))
+```
 
 Write your documentation
 ========================================================
@@ -87,19 +100,25 @@ Common sections:
 Document your function:
 ========================================================
 
-```
+```r
 #' Say Aloha
 #'
 #' @description This function will say aloha to any inputted name.
 #'
 #' @param name (character) A name to say aloha to.
+#' @param print (logical) Option to print your message. Defaults to \code{TRUE}
+#'
+#' @return (charater) An aloha message
+#'
+#' @examples
+#' # Say hello to a friend
+#' friend <- "Irene"
+#' say_aloha(friend)
 #'
 #' @importFrom crayon green
+#' @importFrom emo ji
 #'
 #' @export
-aloha_message <- function(name) {
-  cat(crayon::green("Aloha,", name))
-}
 ```
 
 
@@ -114,6 +133,11 @@ Document your package:
 devtools::document()
 ```
 
+```
+Writing NAMESPACE
+Writing say_aloha.Rd
+```
+
 Check your package
 ========================================================
 
@@ -126,7 +150,7 @@ devtools::check()
 
 ```
 checking package dependencies ... ERROR
-Namespace dependency not required: ‘crayon’
+Namespace dependencies not required: ‘crayon’ ‘emo’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -136,7 +160,7 @@ Description File
 ========================================================
 
 ```
-Package: TEST
+Package: greetings
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
@@ -152,7 +176,7 @@ Edit Description File
 ========================================================
 
 ```
-Package: TEST
+Package: greetings
 Title: Say Aloha to a Friend
 Version: 0.1
 Authors@R: c(
@@ -164,7 +188,8 @@ License: CC0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: crayon
+Imports: crayon, emo
+Remotes: hadley/emo
 Suggests: testthat
 ```
 
@@ -195,13 +220,75 @@ New R script: `test_FUNCTION_NAME.R`
 
 
 ```
-context("My aloha function")
+context("say_aloha function")
 
 test_that("function takes one input", {
-  expect_error(aloha_message("Irene", "Mitchell"))
+
+  testthat::expect_error(say_aloha("Irene", "Mitchell"))
+
+  testthat::expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
 })
 ```
 
+Add data files
+========================================================
+Can create data files (e.g. `View(iris)`)
+
+```r
+friends <- c("Mitchell", "Irene")
+devtools::use_data(friends)
+```
+
+Document data files
+========================================================
+Create a new R/data.R file
+
+```r
+#' Friends list
+#'
+#' A list of friends I like to say aloha to.
+#'
+#' @format A vector with two strings
+"friends"
+```
+
+
+```r
+devtools::document()
+```
+
+```
+Writing friends.Rd
+```
+
+Install package
+========================================================
+
+```r
+devtools::install()
+```
+
+Vignettes
+========================================================
+TODO
+
+Explore package
+========================================================
+
+```r
+greetings::say_aloha(greetings::friends)
+```
+
+```
+Aloha, Mitchell 🌴 ☀️ 🌊 Aloha, Irene 🌴 ☀️ 🌊
+```
+
+
+```r
+.rs.restartR() #restart R to see documentation
+?greetings::say_aloha
+?greetings::friends
+```
 Connect to GitHub
 ========================================================
 1. Create a GitHub repo with the same name
