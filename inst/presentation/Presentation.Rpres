@@ -41,12 +41,10 @@ Create a package in RStudio
 File --> New Project --> New Directory --> R Package
 
 ## Option 2
-```{r eval = FALSE, cache = TRUE}
+```{r eval = FALSE}
 #install.package("devtools")
 devtools::create("~/Desktop/greetings")
 ```
-
-*Would want to do a better giving your package a unique name.*
 
 Write a function
 ========================================================
@@ -121,15 +119,7 @@ Document your function:
 Document your package:
 ========================================================
 
-```{r, echo = FALSE, results = FALSE, cache = TRUE}
-# Reset All Package To Skeleton
-file.remove("../../NAMESPACE")
-file.remove("../../man/say_aloha.Rd")
-Blank_DESCRIPTION <- readLines("../Blank_DESCRIPTION")
-writeLines(Blank_DESCRIPTION, "../../DESCRIPTION")
-```
-
-```{r eval = TRUE, cache = TRUE}
+```{r eval = FALSE}
 # delete any *.Rd or NAMESPACE files before running for the first time
 devtools::document()
 ```
@@ -139,35 +129,51 @@ Check your package
 
 Auto-generates your help files (`/man`) and `NAMESPACE` file:
 
-```{r eval = TRUE, cache = TRUE}
+```{r eval = FALSE}
 devtools::check()
+```
+
+```
+checking package dependencies ... ERROR
+Namespace dependencies not required: ‘crayon’ ‘emo’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 ```
 
 Description File
 ========================================================
-```{r, echo = FALSE, cache = TRUE}
-DESCRIPTION <- readLines("../../DESCRIPTION")
-cat(DESCRIPTION, sep = "\n")
+```{r, eval = FALSE}
+Package: greetings
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+Depends: R (>= 3.4.3)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
 ```
 
 Edit Description File
 ========================================================
-```{r, echo = FALSE, cache = TRUE}
-DESCRIPTION[2] <- "Title: Say Aloha to a Friend"
-DESCRIPTION[3] <- "Version: 0.1"
-DESCRIPTION[4] <- 'Authors@R: c(
-  person("Irene", "Steves", email = "irene.steves@gmail.com", role = c("aut", "cre")),
-  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("aut")))'
-DESCRIPTION[5] <- 'Description: This package provides a pleasant way to say hello or goodbye to a friend.'
-DESCRIPTION[7] <- 'License: CC0'
-DESCRIPTION[11] <- 'Imports: crayon, emo'
-DESCRIPTION[12] <- 'Remotes: hadley/emo'
-DESCRIPTION[13] <- 'Suggests: testthat'
-
-
-writeLines(DESCRIPTION, "../../DESCRIPTION")
-DESCRIPTION <- readLines("../../DESCRIPTION")
-cat(DESCRIPTION, sep = "\n")
+```{r, eval = FALSE}
+Package: greetings
+Title: Say Aloha to a Friend
+Version: 0.1
+Authors@R: c(
+  person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut", "cre")),
+  person("Mitchell", "Maier", comment = "https://github.com/maier-m", role = c("aut")))
+Description: This package provides a pleasant way to say hello or goodbye to a friend.
+Depends: R (>= 3.4.3)
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports: crayon, emo
+Remotes: hadley/emo
+Suggests: testthat
 ```
 
 Check your package again
@@ -193,8 +199,15 @@ Write a unit test
 ========================================================
 New R script: `test_FUNCTION_NAME.R`
 
-```{r echo = FALSE}
-cat(readLines("../../tests/testthat/test_say_aloha.R"), sep = "\n")
+```{r, eval = FALSE}
+context("say_aloha function")
+
+test_that("function takes one input", {
+
+  testthat::expect_error(say_aloha("Irene", "Mitchell"))
+
+  testthat::expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
+})
 ```
 
 Add data files
@@ -217,13 +230,13 @@ Create a new R/data.R file
 "friends"
 ```
 
-```{r eval = TRUE, cache = TRUE}
+```{r eval = FALSE}
 devtools::document()
 ```
 
 Install package
 ========================================================
-```{r}
+```{r, eval = FALSE}
 devtools::install()
 ```
 
@@ -233,8 +246,12 @@ TODO
 
 Explore package
 ========================================================
-```{r}
+```{r, eval = FALSE}
 greetings::say_aloha(greetings::friends)
+```
+
+```
+Aloha, Mitchell 🌴 ☀️ 🌊 Aloha, Irene 🌴 ☀️ 🌊
 ```
 
 ```{r, eval = FALSE}

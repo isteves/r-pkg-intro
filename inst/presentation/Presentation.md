@@ -47,8 +47,6 @@ File --> New Project --> New Directory --> R Package
 devtools::create("~/Desktop/greetings")
 ```
 
-*Would want to do a better giving your package a unique name.*
-
 Write a function
 ========================================================
 
@@ -126,16 +124,9 @@ Document your package:
 ========================================================
 
 
-
-
 ```r
 # delete any *.Rd or NAMESPACE files before running for the first time
 devtools::document()
-```
-
-```
-Writing NAMESPACE
-Writing say_aloha.Rd
 ```
 
 Check your package
@@ -159,7 +150,7 @@ manual.
 Description File
 ========================================================
 
-```
+```r
 Package: greetings
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
@@ -175,13 +166,13 @@ RoxygenNote: 6.0.1
 Edit Description File
 ========================================================
 
-```
+```r
 Package: greetings
 Title: Say Aloha to a Friend
 Version: 0.1
 Authors@R: c(
-  person("Irene", "Steves", email = "irene.steves@gmail.com", role = c("aut", "cre")),
-  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("aut")))
+  person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut", "cre")),
+  person("Mitchell", "Maier", comment = "https://github.com/maier-m", role = c("aut")))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
 Depends: R (>= 3.4.3)
 License: CC0
@@ -219,7 +210,7 @@ Write a unit test
 New R script: `test_FUNCTION_NAME.R`
 
 
-```
+```r
 context("say_aloha function")
 
 test_that("function takes one input", {
@@ -255,10 +246,6 @@ Create a new R/data.R file
 
 ```r
 devtools::document()
-```
-
-```
-Writing friends.Rd
 ```
 
 Install package
