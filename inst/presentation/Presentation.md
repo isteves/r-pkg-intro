@@ -307,7 +307,7 @@ git push -u origin master
 
 Travis - continuous integration
 ========================================================
-![](static/Tessa-pride-4.png)
+![](static/travis.gif)
 
 ***
 
