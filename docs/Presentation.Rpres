@@ -306,11 +306,20 @@ Install package
 ========================================================
 ```{r, eval = FALSE}
 devtools::install()
+devtools::install_github("username/reponame")
 ```
+
+Troubleshooting
+========================================================
+![](static/restart-r.jpg)
 
 Vignettes
 ========================================================
-TODO
+```{r, eval = FALSE}
+devtools::use_vignette("say-aloha-to-your-friends")
+```
+
+*Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.*
 
 Explore package
 ========================================================
@@ -327,7 +336,3 @@ Aloha, Mitchell 🌴 ☀️ 🌊 Aloha, Irene 🌴 ☀️ 🌊
 ?greetings::say_aloha
 ?greetings::friends
 ```
-
-
-
-

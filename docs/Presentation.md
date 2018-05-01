@@ -22,6 +22,9 @@ Package structure
 - Tests (`tests/`)
 - Package metadata (`DESCRIPTION`)
 - Namespace (`NAMESPACE`)
+
+***
+
 - Data (`data/`)
 - Compiled code (`src/`)
 - Installed files (`inst/`)
@@ -52,24 +55,24 @@ Write a function
 
 ```r
 say_aloha <- function(name, print = TRUE) {
-
+  
   message <- paste("Aloha,",
                    name,
                    emo::ji("palm_tree"),
                    emo::ji("sunny"),
                    emo::ji("ocean"))
-
+  
   if (print) {
     cat(crayon::bgGreen(message))
   }
-
-    invisible(message)
+  
+  invisible(message)
 }
 ```
 
-*As always remember to write descriptive funciton names that don't overlap with existing functions*
+*As always remember to write descriptive function names that don't overlap with existing functions*
 
-Add tests to your function
+Add checks to your function
 ========================================================
 
 ```r
@@ -80,6 +83,8 @@ if (!(is.character(name) & nchar(name) > 0)) {
 
 stopifnot(is.logical(print))
 ```
+
+*Checking inputs to the function is easy to do and saves lots of debugging headaches later on by stopping the function early and giving you an understandable error message.*
 
 Write your documentation
 ========================================================
@@ -123,6 +128,8 @@ Document your function:
 Document your package:
 ========================================================
 
+Auto-generates your help files (`/man`) and `NAMESPACE` file:
+
 
 ```r
 # delete any *.Rd or NAMESPACE files before running for the first time
@@ -131,8 +138,6 @@ devtools::document()
 
 Check your package
 ========================================================
-
-Auto-generates your help files (`/man`) and `NAMESPACE` file:
 
 
 ```r
@@ -221,8 +226,71 @@ test_that("function takes one input", {
 })
 ```
 
+Connect to GitHub
+========================================================
+1. Create a GitHub repo with the same name
+
+2. In the Terminal (Tools --> Shell), set up your user name and email if you haven't already:
+```
+git config --global user.name YOUR_NAME
+git config --global user.email GITHUB_USER_EMAIL
+```
+
+3. Link to GitHub and push your local files to your online GitHub repository
+```
+git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
+git push -u origin master
+```
+
+YOUR TURN
+========================================================
+Make sure your package passes all the checks and get it on GitHub!
+
+Advanced topics
+========================================================
+
+- [continuous integration with Travis](#travis)
+- [data files](#data-files)
+- [vignettes](http://r-pkgs.had.co.nz/vignettes.html)
+- [pkgdown](https://github.com/r-lib/pkgdown)
+
+
+Travis - continuous integration
+========================================================
+id: travis
+
+![](static/travis.gif)
+
+***
+
+Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
+
+- perform basic checks on R packages
+- re-build bookdown books ([example](https://github.com/isteves/two-bookdowns-example))
+- run custom scripts ([example](https://github.com/espm-157/popdyn-template))
+
+.travis.yml
+========================================================
+
+Full documentation at: https://docs.travis-ci.com/user/languages/r
+
+```
+language: r
+r:
+  - release
+  - devel
+sudo: false
+cache: packages
+addons:
+   apt:
+    packages:
+      - librdf0-dev
+```
+
 Add data files
 ========================================================
+id: data-files
+
 Can create data files (e.g. `View(iris)`)
 
 ```r
@@ -253,11 +321,21 @@ Install package
 
 ```r
 devtools::install()
+devtools::install_github("username/reponame")
 ```
+
+Troubleshooting
+========================================================
+![](static/restart-r.jpg)
 
 Vignettes
 ========================================================
-TODO
+
+```r
+devtools::use_vignette("say-aloha-to-your-friends")
+```
+
+*Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.*
 
 Explore package
 ========================================================
@@ -276,55 +354,3 @@ Aloha, Mitchell 🌴 ☀️ 🌊 Aloha, Irene 🌴 ☀️ 🌊
 ?greetings::say_aloha
 ?greetings::friends
 ```
-Connect to GitHub
-========================================================
-1. Create a GitHub repo with the same name
-
-2. In the Terminal (Tools --> Shell), set up your user name and email if you haven't already:
-```
-git config --global user.name YOUR_NAME
-git config --global user.email GITHUB_USER_EMAIL
-```
-
-3. Link to GitHub and push your local files to your online GitHub repository
-```
-git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
-git push -u origin master
-```
-
-Travis - continuous integration
-========================================================
-![](static/travis.gif)
-
-***
-
-Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
-
-- perform basic checks on R packages
-- re-build bookdown books ([example](https://github.com/isteves/two-bookdowns-example))
-- run custom scripts ([example](https://github.com/espm-157/popdyn-template))
-
-.travis.yml
-========================================================
-
-Full documentation at: https://docs.travis-ci.com/user/languages/r
-
-```
-language: r
-r:
-  - release
-  - devel
-sudo: false
-cache: packages
-addons:
-   apt:
-    packages:
-      - librdf0-dev
-```
-
-Advanced topics
-========================================================
-
-- [vignettes](http://r-pkgs.had.co.nz/vignettes.html)
-- [pkgdown](https://github.com/r-lib/pkgdown)
-
