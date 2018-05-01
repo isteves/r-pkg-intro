@@ -1,6 +1,6 @@
 # How to create an R package
 
-Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/r-pkg-intro.html#/) to quickly build your first package! 
+Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/Presentation.html#/) to quickly build your first package! 
 
 Also check out these guides to package development in R:
 
