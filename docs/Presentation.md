@@ -238,17 +238,18 @@ test_that("function takes one input", {
 
 Connect to GitHub
 ========================================================
-1. Create a GitHub repo with the same name
+1. Create an *empty* GitHub repo with the same name
 
 2. In the Terminal (Tools --> Shell), set up your user name and email if you haven't already:
 ```
 git config --global user.name YOUR_NAME
-git config --global user.email GITHUB_USER_EMAIL
+git config --global user.email GITHUB_EMAIL
 ```
 
 3. Link to GitHub and push your local files to your online GitHub repository
 ```
 git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
+# make a commit
 git push -u origin master
 ```
 
@@ -261,7 +262,7 @@ Install your neighbor's package and take a look at their documenation.
 
 ```r
 devtools::install_github("username/reponame")
-?reponame::functionname
+# ?reponame::function_name
 ```
 
 Advanced topics
@@ -288,19 +289,20 @@ Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
 .travis.yml
 ========================================================
 
-Full documentation at: https://docs.travis-ci.com/user/languages/r
+
+```r
+devtools::use_travis()
+```
 
 ```
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
 language: r
 r:
   - release
   - devel
 sudo: false
 cache: packages
-addons:
-   apt:
-    packages:
-      - librdf0-dev
 ```
 
 Add data files
@@ -316,7 +318,8 @@ devtools::use_data(friends)
 
 Document data files
 ========================================================
-Create a new R/data.R file
+Create a new `R/data.R` file
+
 
 ```r
 #' Friends list
@@ -334,7 +337,7 @@ devtools::document()
 
 Document package
 ========================================================
-Create a new R/package_name.R file
+Create a new `R/package_name.R` file
 
 ```r
 #' greetings
@@ -376,7 +379,16 @@ devtools::use_vignette("say-aloha-to-your-friends")
 
 Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.
 
-*Read more about it in the [R Packages book](http://r-pkgs.had.co.nz/vignettes.html)*
+When you install a package `devtools::install_github()` and friends, the vignette-building process is skipped by default. To unskip and checkout your vignette, run:
+
+
+```r
+devtools::install(build_vignettes = TRUE)
+# devtools::install_github(build_vignettes = TRUE)
+browseVignettes("greetings")
+```
+
+*Read more about it in the [vignettes chapter](http://r-pkgs.had.co.nz/vignettes.html) of the R Packages book*
 
 Explore package
 ========================================================
