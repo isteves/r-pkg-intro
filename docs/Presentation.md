@@ -1,7 +1,7 @@
 How to Create an R Package
 ========================================================
 author: Irene Steves, Mitchell Maier
-date:
+date: https://github.com/isteves/r-pkg-intro
 autosize: true
 
 Why write a package?
@@ -37,6 +37,8 @@ Resources
 - [R packages](http://r-pkgs.had.co.nz/) book by Hadley Wickham
 - Official [writing R extensions](https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages) guide
 
+- https://github.com/isteves/r-pkg-intro (this presentation)
+
 Create a package in RStudio
 ========================================================
 
@@ -57,22 +59,28 @@ Write a function
 
 ```r
 say_aloha <- function(name, print = TRUE) {
-  
+
   message <- paste("Aloha,",
                    name,
                    emo::ji("palm_tree"),
                    emo::ji("sunny"),
                    emo::ji("ocean"))
-  
+
   if (print) {
     cat(crayon::bgGreen(message))
   }
-  
+
   invisible(message)
 }
 ```
 
 *As always, remember to write descriptive function names that don't overlap with existing functions*
+
+
+```r
+install.packages("crayon")
+devtools::install_github("hadley/emo")
+```
 
 Add checks to your function
 ========================================================
@@ -113,14 +121,14 @@ Document your function:
 #' @param name (character) A name to say aloha to.
 #' @param print (logical) Option to print your message. Defaults to \code{TRUE}
 #'
-#' @return (charater) An aloha message
+#' @return (character) An aloha message
 #'
 #' @examples
 #' # Say hello to a friend
 #' friend <- "Irene"
 #' say_aloha(friend)
 #'
-#' @importFrom crayon green
+#' @importFrom crayon bgGreen
 #' @importFrom emo ji
 #'
 #' @export
@@ -178,8 +186,8 @@ Package: greetings
 Title: Say Aloha to a Friend
 Version: 0.1
 Authors@R: c(
-  person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut", "cre")),
-  person("Mitchell", "Maier", comment = "https://github.com/maier-m", role = c("aut")))
+  person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut")),
+  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("cre", "aut")))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
 Depends: R (>= 3.4.3)
 License: CC0
@@ -324,12 +332,34 @@ Create a new R/data.R file
 devtools::document()
 ```
 
+Document package
+========================================================
+Create a new R/package_name.R file
+
+```r
+#' greetings
+#'
+#' @description A package that provides a pleasant way to say hello or goodbye to a friend.
+#'
+#' @section greetings functions:
+#' say_aloha
+#'
+"_PACKAGE"
+```
+
+
+```r
+devtools::document()
+```
+
 Install package
 ========================================================
 
 ```r
 devtools::install()
 ```
+
+Or click `Install and Restart`
 
 Troubleshooting
 ========================================================
