@@ -50,6 +50,8 @@ File --> New Project --> New Directory --> R Package
 devtools::create("~/Desktop/greetings")
 ```
 
+*Package naming requirements: (1) only letters, numbers, and periods; (2) must start with a letter; (3) cannot end with a period*
+
 Write a function
 ========================================================
 
@@ -70,7 +72,7 @@ say_aloha <- function(name, print = TRUE) {
 }
 ```
 
-*As always remember to write descriptive function names that don't overlap with existing functions*
+*As always, remember to write descriptive function names that don't overlap with existing functions*
 
 Add checks to your function
 ========================================================
@@ -84,7 +86,7 @@ if (!(is.character(name) & nchar(name) > 0)) {
 stopifnot(is.logical(print))
 ```
 
-*Checking inputs to the function is easy to do and saves lots of debugging headaches later on by stopping the function early and giving you an understandable error message.*
+Checking inputs to the function is easy to do and saves lots of debugging headaches later on by (a) stopping the function early and (b) giving you an understandable error message.
 
 Write your documentation
 ========================================================
@@ -246,14 +248,20 @@ YOUR TURN
 ========================================================
 Make sure your package passes all the checks and get it on GitHub!
 
+Install your neighbor's package and take a look at their documenation.
+
+
+```r
+devtools::install_github("username/reponame")
+?reponame::functionname
+```
+
 Advanced topics
 ========================================================
 
 - [continuous integration with Travis](#travis)
 - [data files](#data-files)
-- [vignettes](http://r-pkgs.had.co.nz/vignettes.html)
-- [pkgdown](https://github.com/r-lib/pkgdown)
-
+- [vignettes](#vignettes)
 
 Travis - continuous integration
 ========================================================
@@ -321,7 +329,6 @@ Install package
 
 ```r
 devtools::install()
-devtools::install_github("username/reponame")
 ```
 
 Troubleshooting
@@ -330,12 +337,16 @@ Troubleshooting
 
 Vignettes
 ========================================================
+id: vignettes
+
 
 ```r
 devtools::use_vignette("say-aloha-to-your-friends")
 ```
 
-*Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.*
+Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.
+
+*Read more about it in the [R Packages book](http://r-pkgs.had.co.nz/vignettes.html)*
 
 Explore package
 ========================================================

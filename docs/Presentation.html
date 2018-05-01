@@ -860,6 +860,8 @@ hljs.initHighlightingOnLoad();
 devtools::create(&quot;~/Desktop/greetings&quot;)
 </code></pre>
 
+<p><em>Package naming requirements: (1) only letters, numbers, and periods; (2) must start with a letter; (3) cannot end with a period</em></p>
+
 </div>
 
 </section>
@@ -882,7 +884,7 @@ devtools::create(&quot;~/Desktop/greetings&quot;)
 }
 </code></pre>
 
-<p><em>As always remember to write descriptive function names that don&#39;t overlap with existing functions</em></p>
+<p><em>As always, remember to write descriptive function names that don&#39;t overlap with existing functions</em></p>
 
 </div>
 
@@ -898,7 +900,7 @@ devtools::create(&quot;~/Desktop/greetings&quot;)
 stopifnot(is.logical(print))
 </code></pre>
 
-<p><em>Checking inputs to the function is easy to do and saves lots of debugging headaches later on by stopping the function early and giving you an understandable error message.</em></p>
+<p>Checking inputs to the function is easy to do and saves lots of debugging headaches later on by (a) stopping the function early and (b) giving you an understandable error message.</p>
 
 </div>
 
@@ -1087,6 +1089,12 @@ git push -u origin master
 <div class="slideContent" >
 <p>Make sure your package passes all the checks and get it on GitHub!</p>
 
+<p>Install your neighbor&#39;s package and take a look at their documenation.</p>
+
+<pre><code class="r">devtools::install_github(&quot;username/reponame&quot;)
+?reponame::functionname
+</code></pre>
+
 </div>
 
 </section>
@@ -1096,8 +1104,7 @@ git push -u origin master
 <ul>
 <li><a href="#travis">continuous integration with Travis</a></li>
 <li><a href="#data-files">data files</a></li>
-<li><a href="http://r-pkgs.had.co.nz/vignettes.html">vignettes</a></li>
-<li><a href="https://github.com/r-lib/pkgdown">pkgdown</a></li>
+<li><a href="#vignettes">vignettes</a></li>
 </ul>
 
 </div>
@@ -1180,7 +1187,6 @@ devtools::use_data(friends)
 <h3>Install package</h3>
 <div class="slideContent" >
 <pre><code class="r">devtools::install()
-devtools::install_github(&quot;username/reponame&quot;)
 </code></pre>
 
 </div>
@@ -1194,13 +1200,15 @@ devtools::install_github(&quot;username/reponame&quot;)
 </div>
 
 </section>
-<section data-transition="linear" data-transition-speed="default">
+<section id="vignettes" data-transition="linear" data-transition-speed="default">
 <h3>Vignettes</h3>
 <div class="slideContent" >
 <pre><code class="r">devtools::use_vignette(&quot;say-aloha-to-your-friends&quot;)
 </code></pre>
 
-<p><em>Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it&#39;s useful to describe how your functions can be used together.</em></p>
+<p>Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it&#39;s useful to describe how your functions can be used together.</p>
+
+<p><em>Read more about it in the <a href="http://r-pkgs.had.co.nz/vignettes.html">R Packages book</a></em></p>
 
 </div>
 
