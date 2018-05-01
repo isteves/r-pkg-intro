@@ -1,10 +1,18 @@
 Package: greetings
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: Say Aloha to a Friend
+Version: 0.1
+Authors@R: c(
+  person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut")),
+  person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("cre", "aut")))
+Description: This package provides a pleasant way to say hello or goodbye to a friend.
 Depends: R (>= 3.4.3)
-License: What license is it under?
+License: CC0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+Imports: crayon, emo
+Remotes: hadley/emo
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -12,7 +12,7 @@ say_aloha(name, print = TRUE)
 \item{print}{(logical) Option to print your message. Defaults to \code{TRUE}}
 }
 \value{
-(charater) An aloha message
+(character) An aloha message
 }
 \description{
 This function will say aloha to any inputted name.

@@ -5,14 +5,14 @@
 #' @param name (character) A name to say aloha to.
 #' @param print (logical) Option to print your message. Defaults to \code{TRUE}
 #'
-#' @return (charater) An aloha message
+#' @return (character) An aloha message
 #'
 #' @examples
 #' # Say hello to a friend
 #' friend <- "Irene"
 #' say_aloha(friend)
 #'
-#' @importFrom crayon green
+#' @importFrom crayon bgGreen
 #' @importFrom emo ji
 #'
 #' @export
