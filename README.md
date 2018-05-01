@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/isteves/r-pkg-intro.svg?branch=master)](https://travis-ci.org/isteves/r-pkg-intro)
+
 # How to create an R package
 
 Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/Presentation.html#/) to quickly build your first package! 
