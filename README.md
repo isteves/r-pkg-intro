@@ -4,6 +4,14 @@
 
 Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/Presentation.html#/) to quickly build your first package! :palm_tree: :sunny: :ocean:
 
+**Here's an alternate Git/RStudio workflow you can use to get your package started:**
+
+1. Create an new GitHub repo on https://github.com/new
+2. Create a new Git R project (File --> New Project --> Version Control --> Git --> [paste in Repository URL] & [Create Project])
+3. Use `devtools::create(".")` to initiate a package. You can say "no" when it asks you to overwrite the RProj file.
+
+# Other tips and resources
+
 Also check out these guides to package development in R:
 
 - [Writing an R package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/) blogpost by Hilary Parker
