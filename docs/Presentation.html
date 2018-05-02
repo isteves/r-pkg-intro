@@ -814,7 +814,7 @@ hljs.initHighlightingOnLoad();
 <ul>
 <li>R code (<code>/R</code>)</li>
 <li>Documentation (<code>/man</code>)</li>
-<li>Tests (<code>tests/</code>)</li>
+<li>Tests (<code>/tests</code>)</li>
 <li>Package metadata (<code>DESCRIPTION</code>)</li>
 <li>Namespace (<code>NAMESPACE</code>)</li>
 </ul>
@@ -826,9 +826,10 @@ hljs.initHighlightingOnLoad();
 
 
 <ul>
-<li>Data (<code>data/</code>)</li>
-<li>Compiled code (<code>src/</code>)</li>
-<li>Installed files (<code>inst/</code>)</li>
+<li>Data (<code>/data</code>)</li>
+<li>Vignettes (<code>/vignettes</code>)</li>
+<li>Compiled code (<code>/src</code>)</li>
+<li>Installed files (<code>/inst</code>)</li>
 <li>Other components</li>
 </ul>
 
@@ -993,7 +994,7 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person(&quot;First&quot;, &quot;Last&quot;, email = &quot;first.last@example.com&quot;, role = c(&quot;aut&quot;, &quot;cre&quot;))
 Description: What the package does (one paragraph).
-Depends: R (&gt;= 3.4.3)
+Depends: R (&gt;= 3.4.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -1013,7 +1014,7 @@ Authors@R: c(
   person(&quot;Irene&quot;, &quot;Steves&quot;, comment = &quot;https://github.com/isteves&quot;, role = c(&quot;aut&quot;)),
   person(&quot;Mitchell&quot;, &quot;Maier&quot;, email = &quot;mmaier@ucsb.edu&quot;, role = c(&quot;cre&quot;, &quot;aut&quot;)))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
-Depends: R (&gt;= 3.4.3)
+Depends: R (&gt;= 3.4.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -1095,7 +1096,7 @@ git push -u origin master
 <div class="slideContent" >
 <p>Make sure your package passes all the checks and get it on GitHub!</p>
 
-<p>Install your neighbor&#39;s package and take a look at their documenation.</p>
+<p>Install your neighbor&#39;s package and take a look at their documentation.</p>
 
 <pre><code class="r">devtools::install_github(&quot;username/reponame&quot;)
 # ?reponame::function_name
@@ -1231,11 +1232,17 @@ devtools::use_data(friends)
 <section id="vignettes" data-transition="linear" data-transition-speed="default">
 <h3>Vignettes</h3>
 <div class="slideContent" >
+<p>Vignettes are Rmds that come bundled with your package. Rather than writing about a single function, it&#39;s useful to describe how your functions can be used together.</p>
+
 <pre><code class="r">devtools::use_vignette(&quot;say-aloha-to-your-friends&quot;)
 </code></pre>
 
-<p>Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it&#39;s useful to describe how your functions can be used together.</p>
+</div>
 
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Viewing vignettes</h3>
+<div class="slideContent" >
 <p>When you install a package <code>devtools::install_github()</code> and friends, the vignette-building process is skipped by default. To unskip and checkout your vignette, run:</p>
 
 <pre><code class="r">devtools::install(build_vignettes = TRUE)
@@ -1243,7 +1250,7 @@ devtools::use_data(friends)
 browseVignettes(&quot;greetings&quot;)
 </code></pre>
 
-<p><em>Read more about it in the <a href="http://r-pkgs.had.co.nz/vignettes.html">vignettes chapter</a> of the R Packages book</em></p>
+<p><em>Read more about vignettes in the <a href="http://r-pkgs.had.co.nz/vignettes.html">vignettes chapter</a> of the R Packages book</em></p>
 
 </div>
 
