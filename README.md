@@ -1,6 +1,8 @@
-# How to create an R package
+[![Travis-CI Build Status](https://travis-ci.org/isteves/r-pkg-intro.svg?branch=master)](https://travis-ci.org/isteves/r-pkg-intro)
 
-Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/Presentation.html#/) to quickly build your first package! 
+# How to create an R package :package:
+
+Check out the [slidedeck](https://isteves.github.io/r-pkg-intro/Presentation.html#/) to quickly build your first package! :palm_tree: :sunny: :ocean:
 
 Also check out these guides to package development in R:
 

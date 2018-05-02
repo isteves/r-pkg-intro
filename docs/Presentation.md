@@ -19,15 +19,16 @@ Package structure
 
 - R code (`/R`)
 - Documentation (`/man`)
-- Tests (`tests/`)
+- Tests (`/tests`)
 - Package metadata (`DESCRIPTION`)
 - Namespace (`NAMESPACE`)
 
 ***
 
-- Data (`data/`)
-- Compiled code (`src/`)
-- Installed files (`inst/`)
+- Data (`/data`)
+- Vignettes (`/vignettes`)
+- Compiled code (`/src`)
+- Installed files (`/inst`)
 - Other components
 
 Resources
@@ -171,7 +172,7 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Depends: R (>= 3.4.3)
+Depends: R (>= 3.4.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -189,7 +190,7 @@ Authors@R: c(
   person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut")),
   person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("cre", "aut")))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
-Depends: R (>= 3.4.3)
+Depends: R (>= 3.4.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -243,17 +244,18 @@ test_that("mulitple names allowed", {
 
 Connect to GitHub
 ========================================================
-1. Create a GitHub repo with the same name
+1. Create an *empty* GitHub repo with the same name
 
 2. In the Terminal (Tools --> Shell), set up your user name and email if you haven't already:
 ```
 git config --global user.name YOUR_NAME
-git config --global user.email GITHUB_USER_EMAIL
+git config --global user.email GITHUB_EMAIL
 ```
 
 3. Link to GitHub and push your local files to your online GitHub repository
 ```
 git remote add origin https://github.com/USERNAME/PACKAGE_NAME.git
+# make a commit
 git push -u origin master
 ```
 
@@ -261,12 +263,12 @@ YOUR TURN
 ========================================================
 Make sure your package passes all the checks and get it on GitHub!
 
-Install your neighbor's package and take a look at their documenation.
+Install your neighbor's package and take a look at their documentation.
 
 
 ```r
 devtools::install_github("username/reponame")
-?reponame::functionname
+# ?reponame::function_name
 ```
 
 Advanced topics
@@ -293,19 +295,20 @@ Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
 .travis.yml
 ========================================================
 
-Full documentation at: https://docs.travis-ci.com/user/languages/r
+
+```r
+devtools::use_travis()
+```
 
 ```
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
 language: r
 r:
   - release
   - devel
 sudo: false
 cache: packages
-addons:
-   apt:
-    packages:
-      - librdf0-dev
 ```
 
 Add data files
@@ -321,7 +324,8 @@ devtools::use_data(friends)
 
 Document data files
 ========================================================
-Create a new R/data.R file
+Create a new `R/data.R` file
+
 
 ```r
 #' Friends list
@@ -339,7 +343,7 @@ devtools::document()
 
 Document package
 ========================================================
-Create a new R/package_name.R file
+Create a new `R/package_name.R` file
 
 ```r
 #' greetings
@@ -374,14 +378,26 @@ Vignettes
 ========================================================
 id: vignettes
 
+Vignettes are Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.
+
 
 ```r
 devtools::use_vignette("say-aloha-to-your-friends")
 ```
 
-Vignettes are essentially Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.
+Viewing vignettes
+========================================================
 
-*Read more about it in the [R Packages book](http://r-pkgs.had.co.nz/vignettes.html)*
+When you install a package `devtools::install_github()` and friends, the vignette-building process is skipped by default. To unskip and checkout your vignette, run:
+
+
+```r
+devtools::install(build_vignettes = TRUE)
+# devtools::install_github(build_vignettes = TRUE)
+browseVignettes("greetings")
+```
+
+*Read more about vignettes in the [vignettes chapter](http://r-pkgs.had.co.nz/vignettes.html) of the R Packages book*
 
 Explore package
 ========================================================
