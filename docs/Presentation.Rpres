@@ -201,6 +201,8 @@ devtools::check()
 Unit tests
 ========================================================
 
+Rather than checking your functions ad-hoc, write **unit tests** to formalize these checks and make sure your function works the way you think it should!
+
 - fewer bugs
 - better code structure
 - easier restarts
