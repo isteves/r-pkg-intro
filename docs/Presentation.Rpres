@@ -217,11 +217,16 @@ New R script: `test_FUNCTION_NAME.R`
 ```{r, eval = FALSE}
 context("say_aloha function")
 
-test_that("function takes one input", {
+test_that("second input should be TRUE or FALSE", {
 
-  testthat::expect_error(say_aloha("Irene", "Mitchell"))
+  expect_error(say_aloha("Irene", "Mitchell"))
 
-  testthat::expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
+  })
+
+test_that("mulitple names allowed", {
+
+  expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
+
 })
 ```
 
