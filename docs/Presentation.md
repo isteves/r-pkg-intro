@@ -86,13 +86,15 @@ devtools::install_github("hadley/emo")
 Add checks to your function
 ========================================================
 
-```r
-if (!(is.character(name) & nchar(name) > 0)) {
-  stop("Name must be a non empty character.
-       Input a name you want to say aloha to!")
-}
+These should be included _inside_ your function:
 
+
+```r
 stopifnot(is.logical(print))
+
+if (!(is.character(name))) {
+  stop("Name must be a non empty character. Input a name you want to say aloha to!")
+}
 ```
 
 Checking inputs to the function is easy to do and saves lots of debugging headaches later on by (a) stopping the function early and (b) giving you an understandable error message.
@@ -172,7 +174,7 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -190,7 +192,7 @@ Authors@R: c(
   person("Irene", "Steves", comment = "https://github.com/isteves", role = c("aut")),
   person("Mitchell", "Maier", email = "mmaier@ucsb.edu", role = c("cre", "aut")))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -211,6 +213,8 @@ devtools::check()
 Unit tests
 ========================================================
 
+Rather than checking your functions ad-hoc, write **unit tests** to formalize these checks and make sure your function works the way you think it should!
+
 - fewer bugs
 - better code structure
 - easier restarts
@@ -230,10 +234,7 @@ New R script: `test_FUNCTION_NAME.R`
 context("say_aloha function")
 
 test_that("function takes one input", {
-
-  testthat::expect_error(say_aloha("Irene", "Mitchell"))
-
-  testthat::expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
+  testthat::expect_error(say_aloha(c("Irene", "Mitchell")))
 })
 ```
 

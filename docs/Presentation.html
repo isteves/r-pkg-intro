@@ -898,12 +898,13 @@ devtools::install_github(&quot;hadley/emo&quot;)
 <section data-transition="linear" data-transition-speed="default">
 <h3>Add checks to your function</h3>
 <div class="slideContent" >
-<pre><code class="r">if (!(is.character(name) &amp; nchar(name) &gt; 0)) {
-  stop(&quot;Name must be a non empty character.
-       Input a name you want to say aloha to!&quot;)
-}
+<p>These should be included <em>inside</em> your function:</p>
 
-stopifnot(is.logical(print))
+<pre><code class="r">stopifnot(is.logical(print))
+
+if (!(is.character(name))) {
+  stop(&quot;Name must be a non empty character. Input a name you want to say aloha to!&quot;)
+}
 </code></pre>
 
 <p>Checking inputs to the function is easy to do and saves lots of debugging headaches later on by (a) stopping the function early and (b) giving you an understandable error message.</p>
@@ -994,7 +995,7 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person(&quot;First&quot;, &quot;Last&quot;, email = &quot;first.last@example.com&quot;, role = c(&quot;aut&quot;, &quot;cre&quot;))
 Description: What the package does (one paragraph).
-Depends: R (&gt;= 3.4.0)
+Depends: R (&gt;= 3.3.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -1014,7 +1015,7 @@ Authors@R: c(
   person(&quot;Irene&quot;, &quot;Steves&quot;, comment = &quot;https://github.com/isteves&quot;, role = c(&quot;aut&quot;)),
   person(&quot;Mitchell&quot;, &quot;Maier&quot;, email = &quot;mmaier@ucsb.edu&quot;, role = c(&quot;cre&quot;, &quot;aut&quot;)))
 Description: This package provides a pleasant way to say hello or goodbye to a friend.
-Depends: R (&gt;= 3.4.0)
+Depends: R (&gt;= 3.3.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -1039,6 +1040,8 @@ Suggests: testthat
 <section data-transition="linear" data-transition-speed="default">
 <h3>Unit tests</h3>
 <div class="slideContent" >
+<p>Rather than checking your functions ad-hoc, write <strong>unit tests</strong> to formalize these checks and make sure your function works the way you think it should!</p>
+
 <ul>
 <li>fewer bugs</li>
 <li>better code structure</li>
@@ -1060,10 +1063,7 @@ Suggests: testthat
 <pre><code class="r">context(&quot;say_aloha function&quot;)
 
 test_that(&quot;function takes one input&quot;, {
-
-  testthat::expect_error(say_aloha(&quot;Irene&quot;, &quot;Mitchell&quot;))
-
-  testthat::expect_is(say_aloha(c(&quot;Irene&quot;, &quot;Mitchell&quot;), print = FALSE), &quot;character&quot;)
+  testthat::expect_error(say_aloha(c(&quot;Irene&quot;, &quot;Mitchell&quot;)))
 })
 </code></pre>
 
