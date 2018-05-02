@@ -82,13 +82,15 @@ devtools::install_github("hadley/emo")
 
 Add checks to your function
 ========================================================
-```{r, eval = FALSE}
-if (!(is.character(name) & nchar(name) > 0)) {
-  stop("Name must be a non empty character.
-       Input a name you want to say aloha to!")
-}
 
+These should be included _inside_ your function:
+
+```{r, eval = FALSE}
 stopifnot(is.logical(print))
+
+if (!(is.character(name))) {
+  stop("Name must be a non empty character. Input a name you want to say aloha to!")
+}
 ```
 
 Checking inputs to the function is easy to do and saves lots of debugging headaches later on by (a) stopping the function early and (b) giving you an understandable error message.
@@ -220,10 +222,7 @@ New R script: `test_FUNCTION_NAME.R`
 context("say_aloha function")
 
 test_that("function takes one input", {
-
-  testthat::expect_error(say_aloha("Irene", "Mitchell"))
-
-  testthat::expect_is(say_aloha(c("Irene", "Mitchell"), print = FALSE), "character")
+  testthat::expect_error(say_aloha(c("Irene", "Mitchell")))
 })
 ```
 
