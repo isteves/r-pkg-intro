@@ -34,6 +34,8 @@ And some **keyboard short-cuts**:
 - *Cmd + shift + t* = `devtools::test()`
 - *Cmd + shift + d* = `devtools::document()`
 
+If you are on Windows, Use `Ctrl` in the place of `Cmd` for the above shortcuts work.
+
 Other reading/resources:
 
 - [Unix Design Philosophy](http://wiki.c2.com/?UnixDesignPhilosophy) - design principles to think about when designing software/etc; many points are echoed in the [R packages book](http://r-pkgs.had.co.nz/)
