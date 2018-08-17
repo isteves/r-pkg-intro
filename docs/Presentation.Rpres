@@ -49,7 +49,7 @@ File --> New Project --> New Directory --> R Package
 ## Option 2
 ```{r eval = FALSE}
 #install.package("devtools")
-devtools::create("~/Desktop/greetings")
+usethis::create_package("~/Desktop/greetings")
 ```
 
 *Package naming requirements: (1) only letters, numbers, and periods; (2) must start with a letter; (3) cannot end with a period*
@@ -211,7 +211,7 @@ Rather than checking your functions ad-hoc, write **unit tests** to formalize th
 - robust code
 
 ```{r eval = FALSE}
-devtools::use_testthat()
+usethis::use_testthat()
 ```
 
 Write a unit test
@@ -279,7 +279,7 @@ Log in to [Travis](https://travis-ci.org/) with GitHub and use it to:
 ========================================================
 
 ```{r eval = FALSE}
-devtools::use_travis()
+usethis::use_travis()
 ```
 
 ```
@@ -300,7 +300,7 @@ id: data-files
 Can create data files (e.g. `View(iris)`)
 ```{r, eval = FALSE}
 friends <- c("Mitchell", "Irene")
-devtools::use_data(friends)
+usethis::use_data(friends)
 ```
 
 Document data files
@@ -357,7 +357,7 @@ id: vignettes
 Vignettes are Rmds that come bundled with your package. Rather than writing about a single function, it's useful to describe how your functions can be used together.
 
 ```{r, eval = FALSE}
-devtools::use_vignette("say-aloha-to-your-friends")
+usethis::use_vignette("say-aloha-to-your-friends")
 ```
 
 Viewing vignettes
